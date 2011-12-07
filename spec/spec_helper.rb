@@ -28,4 +28,16 @@ RSpec.configure do |config|
   def test_sign_in(user)
     controller.sign_in(user)
   end
+  
+  def integration_sign_in(user)
+    visit signin_path
+    if user.nil?
+      fill_in :email,    :with => ""
+      fill_in :password, :with => ""
+    else
+      fill_in :email,    :with => user.email
+      fill_in :password, :with => user.password
+    end
+    click_button
+  end
 end
